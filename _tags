@@ -1,0 +1,120 @@
+<**/*.ml{,i}>: warn(-40), no_alias_deps
+<**/*>: thread
+# This prevents the implicit addition of -ppx options by ocamlfind
+<**/*>: predicate(custom_ppx)
+<src/*.ml>: for-pack(Async_ssl)
+<bindings/*.ml>: for-pack(Async_ssl_bindings)
+<bindings/*.ml{,i}>: pp(ppx-jane -dump-ast -inline-test-drop -bench-drop -inline-test-lib fake_for_drop)
+<bindings/*.ml{,i}>: pp_deps_for_bindings
+<src/*.ml{,i}>: pp(ppx-jane -dump-ast -inline-test-drop -bench-drop -inline-test-lib fake_for_drop)
+<stubgen/*.ml{,i}>: pp(ppx-jane -dump-ast -inline-test-drop -bench-drop -inline-test-lib fake_for_drop)
+<namespace_wrappers/*>: warn(-49)
+"namespace_wrappers": include
+<**/*.c>: use_openssl_ccopt
+<{src,bindings}/*>: use_openssl_cclib
+# OASIS_START
+# DO NOT EDIT (digest: 50f344fce408f20b8da4b6f4cc2727f6)
+# Ignore VCS directories, you can use the same kind of rule outside
+# OASIS_START/STOP if you want to exclude directories that contains
+# useless stuff for the build process
+true: annot, bin_annot
+<**/.svn>: -traverse
+<**/.svn>: not_hygienic
+".bzr": -traverse
+".bzr": not_hygienic
+".hg": -traverse
+".hg": not_hygienic
+".git": -traverse
+".git": not_hygienic
+"_darcs": -traverse
+"_darcs": not_hygienic
+# Library async_ssl_bindings
+"bindings/async_ssl_bindings.cmxs": use_async_ssl_bindings
+"bindings/ffi_bindings.cmx": for-pack(Async_ssl_bindings)
+<bindings/*.ml{,i,y}>: package(bin_prot)
+<bindings/*.ml{,i,y}>: package(ctypes)
+<bindings/*.ml{,i,y}>: package(ctypes.stubs)
+<bindings/*.ml{,i,y}>: package(fieldslib)
+<bindings/*.ml{,i,y}>: package(ppx_assert.runtime-lib)
+<bindings/*.ml{,i,y}>: package(ppx_bench.runtime-lib)
+<bindings/*.ml{,i,y}>: package(ppx_expect.collector)
+<bindings/*.ml{,i,y}>: package(ppx_inline_test.runtime-lib)
+<bindings/*.ml{,i,y}>: package(sexplib)
+<bindings/*.ml{,i,y}>: package(typerep)
+<bindings/*.ml{,i,y}>: package(variantslib)
+# Library async_ssl
+"src/async_ssl.cmxs": use_async_ssl
+"src/ffi.cmx": for-pack(Async_ssl)
+"src/ffi_generated.cmx": for-pack(Async_ssl)
+"src/import.cmx": for-pack(Async_ssl)
+"src/ssl.cmx": for-pack(Async_ssl)
+"src/std.cmx": for-pack(Async_ssl)
+"src/version.cmx": for-pack(Async_ssl)
+<src/async_ssl.{cma,cmxa}>: use_libasync_ssl_stubs
+<src/*.ml{,i,y}>: package(async)
+<src/*.ml{,i,y}>: package(bin_prot)
+<src/*.ml{,i,y}>: package(core)
+<src/*.ml{,i,y}>: package(ctypes)
+<src/*.ml{,i,y}>: package(ctypes.stubs)
+<src/*.ml{,i,y}>: package(fieldslib)
+<src/*.ml{,i,y}>: package(ppx_assert.runtime-lib)
+<src/*.ml{,i,y}>: package(ppx_bench.runtime-lib)
+<src/*.ml{,i,y}>: package(ppx_expect.collector)
+<src/*.ml{,i,y}>: package(ppx_inline_test.runtime-lib)
+<src/*.ml{,i,y}>: package(sexplib)
+<src/*.ml{,i,y}>: package(typerep)
+<src/*.ml{,i,y}>: package(variantslib)
+<src/*.ml{,i,y}>: use_async_ssl_bindings
+"src/ffi_generated_stubs.c": package(async)
+"src/ffi_generated_stubs.c": package(bin_prot)
+"src/ffi_generated_stubs.c": package(core)
+"src/ffi_generated_stubs.c": package(ctypes)
+"src/ffi_generated_stubs.c": package(ctypes.stubs)
+"src/ffi_generated_stubs.c": package(fieldslib)
+"src/ffi_generated_stubs.c": package(ppx_assert.runtime-lib)
+"src/ffi_generated_stubs.c": package(ppx_bench.runtime-lib)
+"src/ffi_generated_stubs.c": package(ppx_expect.collector)
+"src/ffi_generated_stubs.c": package(ppx_inline_test.runtime-lib)
+"src/ffi_generated_stubs.c": package(sexplib)
+"src/ffi_generated_stubs.c": package(typerep)
+"src/ffi_generated_stubs.c": package(variantslib)
+"src/ffi_generated_stubs.c": use_async_ssl_bindings
+# Executable ffi_stubgen
+<stubgen/ffi_stubgen.{native,byte}>: package(bin_prot)
+<stubgen/ffi_stubgen.{native,byte}>: package(ctypes)
+<stubgen/ffi_stubgen.{native,byte}>: package(ctypes.stubs)
+<stubgen/ffi_stubgen.{native,byte}>: package(fieldslib)
+<stubgen/ffi_stubgen.{native,byte}>: package(ppx_assert.runtime-lib)
+<stubgen/ffi_stubgen.{native,byte}>: package(ppx_bench.runtime-lib)
+<stubgen/ffi_stubgen.{native,byte}>: package(ppx_expect.collector)
+<stubgen/ffi_stubgen.{native,byte}>: package(ppx_inline_test.runtime-lib)
+<stubgen/ffi_stubgen.{native,byte}>: package(sexplib)
+<stubgen/ffi_stubgen.{native,byte}>: package(typerep)
+<stubgen/ffi_stubgen.{native,byte}>: package(variantslib)
+<stubgen/ffi_stubgen.{native,byte}>: use_async_ssl_bindings
+# Executable ffi_types_stubgen
+<stubgen/ffi_types_stubgen.{native,byte}>: package(bin_prot)
+<stubgen/ffi_types_stubgen.{native,byte}>: package(ctypes)
+<stubgen/ffi_types_stubgen.{native,byte}>: package(ctypes.stubs)
+<stubgen/ffi_types_stubgen.{native,byte}>: package(fieldslib)
+<stubgen/ffi_types_stubgen.{native,byte}>: package(ppx_assert.runtime-lib)
+<stubgen/ffi_types_stubgen.{native,byte}>: package(ppx_bench.runtime-lib)
+<stubgen/ffi_types_stubgen.{native,byte}>: package(ppx_expect.collector)
+<stubgen/ffi_types_stubgen.{native,byte}>: package(ppx_inline_test.runtime-lib)
+<stubgen/ffi_types_stubgen.{native,byte}>: package(sexplib)
+<stubgen/ffi_types_stubgen.{native,byte}>: package(typerep)
+<stubgen/ffi_types_stubgen.{native,byte}>: package(variantslib)
+<stubgen/ffi_types_stubgen.{native,byte}>: use_async_ssl_bindings
+<stubgen/*.ml{,i,y}>: package(bin_prot)
+<stubgen/*.ml{,i,y}>: package(ctypes)
+<stubgen/*.ml{,i,y}>: package(ctypes.stubs)
+<stubgen/*.ml{,i,y}>: package(fieldslib)
+<stubgen/*.ml{,i,y}>: package(ppx_assert.runtime-lib)
+<stubgen/*.ml{,i,y}>: package(ppx_bench.runtime-lib)
+<stubgen/*.ml{,i,y}>: package(ppx_expect.collector)
+<stubgen/*.ml{,i,y}>: package(ppx_inline_test.runtime-lib)
+<stubgen/*.ml{,i,y}>: package(sexplib)
+<stubgen/*.ml{,i,y}>: package(typerep)
+<stubgen/*.ml{,i,y}>: package(variantslib)
+<stubgen/*.ml{,i,y}>: use_async_ssl_bindings
+# OASIS_STOP
